@@ -30,14 +30,21 @@
                 "most_free": true,
                 "random": false
             },
-            "ami_name": "amzn2_custom_{{timestamp}}"
+            "ami_name": "amzn2_custom_{{timestamp}}",
+            "tags": {
+                "ami_type": "Amazon Linux 2",
+                "created_by": "Packer"
+            }
         }
     ],
     "provisioners": [
         {
-            "type": "shell",
-            "script": "packer/os_customisation.sh",
-            "execute_command": "echo 'os customisation' | sudo -S bash {{.Path}}"
+            "type": "ansible",
+            "playbook_file": "ansible/webserver.yaml",
+            "extra_arguments": [
+                "-v"
+            ],
+            "user": "ec2-user"
         }
     ]
 }

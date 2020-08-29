@@ -1,0 +1,60 @@
+- name: Upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+
+- name: Disable IPV6
+  shell: |
+    cat >> /etc/sysctl.conf << EOL
+    net.ipv6.conf.all.disable_ipv6 = 1
+    net.ipv6.conf.default.disable_ipv6 = 1
+    EOL
+    sed -i 's/^.*AddressFamily.*$/AddressFamily inet/g' /etc/ssh/sshd_config
+  args:
+    executable: /bin/bash
+
+- name: Install extra packages
+  yum:
+    name:
+      - ntp
+      - telnet
+      - mtr
+      - tree
+    state: present
+    update_cache: yes
+
+- name: Uninstall chrony
+  yum:
+    name: chrony
+    state: absent
+
+- name: Configure date time
+  shell: |
+    timedatectl set-timezone Australia/Melbourne
+    timedatectl set-ntp yes
+    ntpd -gq
+  args:
+    executable: /bin/bash
+
+- name: Enable and start ntpd service
+  systemd:
+    name: ntpd
+    state: started
+    enabled: yes
+
+- name: Set max limits
+  shell: |
+    echo 'fs.file-max = 65536' >> /etc/sysctl.conf
+    rm -f /etc/security/limits.d/*
+    cat > /etc/security/limits.d/custom.conf << EOL
+    * soft     nproc          65535
+    * hard     nproc          65535
+    * soft     nofile         65535
+    * hard     nofile         65535
+    EOL
+  args:
+    executable: /bin/bash
+
+- name: Enable SELinux
+  shell: sed -i 's/^SELINUX=.*$/SELINUX=enforcing/g' /etc/selinux/config
