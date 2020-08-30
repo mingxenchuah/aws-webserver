@@ -8,5 +8,5 @@ AWS_REGION="ap-southeast-2"
 # EC2 build config
 INSTANCE_TYPE="t2.micro"
 VPC_ID="vpc-e5cddb82"
-SUBNET_ID="subnet-50886318"
+SUBNET_ID_LIST='["subnet-50886318","subnet-a611efc0"]'
 KEY_PAIR_NAME="ec2-user"
