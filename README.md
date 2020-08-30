@@ -59,7 +59,7 @@ This is a fully automated solution to deploy a Python web application to AWS.
 
 ### Out of scope
 
-* Setting an automation server (example: Jenkins).
+* Setting up an automation server (example: Jenkins).
 * Configuring AWS alerts/notifications.
 * Monitoring web application logs.
 
@@ -113,7 +113,9 @@ Infrastructure monitoring:
 1. Shell scripts are used to chain the different stages in place of a CI/CD tool like Jenkins. Jenkins pipeline is preferred but that would add unnecessary complexity to this exercise.
 2. All tooling dependencies are managed in a Docker container.
 3. **src** folder is mounted to the Docker container instead of copied so that log and Terraform state files persists after container is removed. Docker containers are run with the --rm flag to avoid dangling containers.
-4. AMI is pre-baked using Packer at the start. This enables a standard use-case specific AMI ready to be dropped into a launch config without requiring any post-launch steps.
-5. Python web application source files should be decoupled and hosted in a separate Git repository and pulled at runtime but is included in this repository sake of simplicity.
-6. Auto scaling group will only maintain 1 EC2 instance (min=1, max=1).
-7. OS level firewall is not used (unnecessary redundancy) because security group is completely locked down to allow only incoming port 80 traffic from load balancer.
+4. Amazon Linux 2 is chosen to host the web application because it's a RHEL based enterprise OS that is optimised for EC2.
+5. AMI is pre-baked using Packer at the start. This enables a standard use-case specific AMI ready to be dropped into a launch config without requiring any post-launch steps.
+6. Python web application source files should be decoupled and hosted in a separate Git repository and pulled at runtime but is included in this repository for the sake of simplicity.
+7. Auto scaling group and application load balancer combination achieves good disaster recovery outcomes with minimal overhead and setup complexity.
+8. OS level firewall is not used (unnecessary redundancy) because security group is completely locked down to allow only incoming port 80 traffic from load balancer.
+9. Putting parameter values (including access keys) in a file (vars.sh) is bad practice but is done to control for execution environment and minimize user interaction.
