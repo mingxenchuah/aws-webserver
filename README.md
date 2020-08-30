@@ -16,13 +16,13 @@ This is a fully automated solution to deploy a Python web application to AWS.
 
 ### Requirements
 
-1. Linux machine requirement:
+1. Linux machine requirements:
 
 * internet access
 * Git CLI
 * Docker
 
-2. AWS account requirement:
+2. AWS account requirements:
 
 * IAM user with Autoscaling and Elastic Load Balancing roles.
 * Access key for IAM user.
@@ -42,7 +42,8 @@ This is a fully automated solution to deploy a Python web application to AWS.
 ```
 ./deploy.sh
 ```
-4. Execute shell script to tear down.
+4. (Optional) Terminate the EC2 instance (Name: Exercise Webserver) and wait for auto-recovery.
+5. Execute shell script to tear down.
 ```
 ./destroy.sh
 ```
