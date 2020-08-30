@@ -79,11 +79,17 @@ resource "aws_autoscaling_group" "this" {
   max_size                  = 1
   min_size                  = 1
   target_group_arns         = [ aws_lb_target_group.this.id ]
-  health_check_grace_period = 300
+  health_check_grace_period = 180
   health_check_type         = "ELB"
   wait_for_elb_capacity     = 1
   launch_configuration      = aws_launch_configuration.this.id
   vpc_zone_identifier       = var.subnet_id_list
+
+  tag {
+    key                 = "Name"
+    value               = "Exercise Webserver"
+    propagate_at_launch = true
+  }
 
   depends_on = [
     aws_launch_configuration.this,
