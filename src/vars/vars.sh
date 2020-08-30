@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # AWS credentials
-AWS_ACCESS_KEY="AKIAWIT4R6FBJVKIYGD7"
-AWS_SECRET_KEY="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"
-AWS_REGION="ap-southeast-2"
+AWS_ACCESS_KEY=""
+AWS_SECRET_KEY=""
+AWS_REGION=""
 
 # EC2 build config
-INSTANCE_TYPE="t2.micro"
-VPC_ID="vpc-e5cddb82"
-SUBNET_ID_LIST='["subnet-50886318","subnet-a611efc0"]'
-KEY_PAIR_NAME="ec2-user"
+INSTANCE_TYPE=""
+KEY_PAIR_NAME=""
+VPC_ID=""
+# Minimum 2 subnets across 2 AZ's required.
+SUBNET_ID_LIST='["",""]'
