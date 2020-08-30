@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /src
 mkdir logs
 
 source ./scripts/vars.sh
