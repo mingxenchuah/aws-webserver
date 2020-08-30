@@ -40,7 +40,7 @@
     "provisioners": [
         {
             "type": "ansible",
-            "playbook_file": "ansible/webserver.yaml",
+            "playbook_file": "/src/ansible/webserver.yaml",
             "extra_arguments": [
                 "-v"
             ],
