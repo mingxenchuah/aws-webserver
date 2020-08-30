@@ -42,13 +42,26 @@ This is a fully automated solution to deploy a Python web application to AWS.
 ```
 ./deploy.sh
 ```
-4. (Optional) Terminate the EC2 instance (Name: Exercise Webserver) and wait for auto-recovery.
+4. (Optional) Terminate EC2 instance (Name: Exercise Webserver) and wait for auto-recovery.
 5. Execute shell script to tear down.
 ```
 ./destroy.sh
 ```
 
 ## Design
+
+### In Scope
+
+* Automation to build and deploy web application infrastructure in AWS.
+* Web application should be self-healing.
+* Infrastructure should be secure
+* Infrastructure monitoring should be available.
+
+### Out of scope
+
+* Setting an automation server (example: Jenkins).
+* Configuring AWS alerts/notifications.
+* Monitoring web application logs.
 
 ### Architecture
 
