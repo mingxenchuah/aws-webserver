@@ -3,7 +3,7 @@
 cd /src
 mkdir logs
 
-source ./scripts/vars.sh
+source ./vars/vars.sh
 
 source ./scripts/packer_build.sh
 
